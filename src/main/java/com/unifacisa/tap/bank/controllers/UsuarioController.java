@@ -1,6 +1,7 @@
 package com.unifacisa.tap.bank.controllers;
 
 import com.unifacisa.tap.bank.entities.Usuario;
+import com.unifacisa.tap.bank.exceptions.CPFAssociadoException;
 import com.unifacisa.tap.bank.services.UsuarioService;
 import com.unifacisa.tap.bank.services.dto.UsuarioDto;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +37,9 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioDto> save(@RequestBody UsuarioDto usuarioDto) {
+        if (usuarioService.existsByCpf(usuarioDto.getCpf())) {
+            throw new CPFAssociadoException("Este CPF já possui uma conta associada.");
+        }
         UsuarioDto dto = usuarioService.save(usuarioDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(dto));
     }

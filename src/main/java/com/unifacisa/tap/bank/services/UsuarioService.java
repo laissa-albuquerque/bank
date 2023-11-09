@@ -45,4 +45,8 @@ public class UsuarioService {
         applicationEventPublisher.publishEvent(new UsuarioEvent(obj.getId()));
         return usuarioMapper.toDto(obj);
     }
+    public boolean existsByCpf(String cpf) {
+        return usuarioRepository.existsByCpf(cpf);
+    }
+
 }

@@ -18,6 +18,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;
+    private String cpf;
 
     @JsonBackReference
     @OneToOne(cascade=CascadeType.ALL)
