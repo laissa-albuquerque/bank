@@ -2,6 +2,7 @@ package com.unifacisa.tap.bank.controllers;
 
 import com.unifacisa.tap.bank.entities.Conta;
 import com.unifacisa.tap.bank.services.ContaService;
+import com.unifacisa.tap.bank.services.dto.ContaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,8 @@ public class ContaController {
     @Autowired
     private ContaService contaService;
 
-
     @GetMapping("/{uuid}")
-    public ResponseEntity<Conta> getContaById(@PathVariable(value = "uuid") UUID id) {
+    public ResponseEntity<ContaDto> getContaById(@PathVariable(value = "uuid") UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(contaService.findById(id));
     }
 
@@ -29,10 +29,10 @@ public class ContaController {
     }
 
     @PostMapping("/{contaId}/depositar")
-    public ResponseEntity<Conta> depositar(@PathVariable UUID contaId, @RequestBody Map<String, Double> requestBody) {
+    public ResponseEntity<ContaDto> depositar(@PathVariable UUID contaId, @RequestBody Map<String, Double> requestBody) {
         if (requestBody.containsKey("valor")) {
             double valor = requestBody.get("valor");
-            Conta conta = contaService.findById(contaId);
+            ContaDto conta = contaService.findById(contaId);
             if (conta == null) {
                 return ResponseEntity.notFound().build();
             }
@@ -42,10 +42,10 @@ public class ContaController {
     }
 
     @PostMapping("/{contaId}/sacar")
-    public ResponseEntity<Conta> sacar(@PathVariable UUID contaId, @RequestBody Map<String, Double> requestBody) {
+    public ResponseEntity<ContaDto> sacar(@PathVariable UUID contaId, @RequestBody Map<String, Double> requestBody) {
         if (requestBody.containsKey("valor")) {
             double valor = requestBody.get("valor");
-            Conta conta = contaService.findById(contaId);
+            ContaDto conta = contaService.findById(contaId);
             if (conta == null) {
                 return ResponseEntity.notFound().build();
             }

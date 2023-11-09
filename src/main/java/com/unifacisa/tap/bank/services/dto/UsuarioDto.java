@@ -2,16 +2,15 @@ package com.unifacisa.tap.bank.services.dto;
 
 import com.unifacisa.tap.bank.entities.Conta;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UsuarioDto {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;

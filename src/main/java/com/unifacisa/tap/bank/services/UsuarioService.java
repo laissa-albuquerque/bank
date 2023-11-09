@@ -26,7 +26,7 @@ public class UsuarioService {
     ApplicationEventPublisher applicationEventPublisher;
 
     public List<UsuarioDto> getAll() {
-        return usuarioRepository.findAll().stream().map(UsuarioMapper.INSTANTE::toDto).collect(Collectors.toList());
+        return usuarioRepository.findAll().stream().map(UsuarioMapper.INSTANCE::toDto).collect(Collectors.toList());
     }
 
     public UsuarioDto findById(UUID id) {
