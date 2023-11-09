@@ -17,13 +17,13 @@ public class ContaController {
     private ContaService contaService;
 
 
-    @GetMapping("/{contaId}")
-    public ResponseEntity<Conta> getContaById(@PathVariable(value = "id") UUID id) {
+    @GetMapping("/{uuid}")
+    public ResponseEntity<Conta> getContaById(@PathVariable(value = "uuid") UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(contaService.findById(id));
     }
 
-    @DeleteMapping("/{contaId}")
-    public void deleteById(@PathVariable(value = "id") UUID id) {
+    @DeleteMapping("/{uuid}")
+    public void deleteById(@PathVariable(value = "uuid") UUID id) {
         contaService.deleteById(id);
     }
 
