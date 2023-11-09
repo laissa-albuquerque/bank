@@ -1,5 +1,6 @@
 package com.unifacisa.tap.bank.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class Usuario {
     private UUID id;
     private String nome;
 
-    @OneToOne(optional = false, cascade=CascadeType.ALL)
+    @JsonBackReference
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "contaId", referencedColumnName = "id")
     private Conta conta;
 
