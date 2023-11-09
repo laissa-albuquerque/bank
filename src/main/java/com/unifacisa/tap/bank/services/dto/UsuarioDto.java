@@ -15,5 +15,6 @@ public class UsuarioDto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;
+    private String cpf;
     private Conta conta;
 }
