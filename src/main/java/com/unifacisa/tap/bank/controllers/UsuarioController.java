@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<Usuario> getUserById(@PathVariable(value = "uuid") UUID id) {
+    public ResponseEntity<UsuarioDto> getUserById(@PathVariable(value = "uuid") UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.findById(id));
     }
 
@@ -36,10 +35,9 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody UsuarioDto usuarioDto) {
-        var usuario = new Usuario();
-        BeanUtils.copyProperties(usuarioDto, usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
+    public ResponseEntity<UsuarioDto> save(@RequestBody UsuarioDto usuarioDto) {
+        UsuarioDto dto = usuarioService.save(usuarioDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(dto));
     }
 
 }
